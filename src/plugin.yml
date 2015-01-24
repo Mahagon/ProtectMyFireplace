@@ -3,4 +3,4 @@ main: net.mahagon.ProtectMyFireplace.ProtectMyFireplacePlugin
 author: Mahagon
 prefix: ProtectMyFireplace
 desciption: Prevent destroying fireplaces with netherblocks below.
-version: 1.0.0
+version: 1.0.1
