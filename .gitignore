@@ -1,0 +1,22 @@
+# Eclipse stuff
+/.classpath
+/.project
+/.settings
+/eclipse
+
+# Mac filesystem dust
+/.DS_Store
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# various other potential build files
+/build
+/bin
+/release
+/agitar
+/dist
+/manifest.mf
