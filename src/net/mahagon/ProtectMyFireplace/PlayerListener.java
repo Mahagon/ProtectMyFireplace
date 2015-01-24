@@ -17,8 +17,9 @@ public class PlayerListener implements Listener {
 			Player player = event.getPlayer();
 			Block block = player.getTargetBlock(null, 5);
 			if(block != null && block.getType().equals(Material.FIRE) && block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK)){
-				player.sendMessage(ChatColor.RED + "[PMF]Fire above netherrack is protected, you need to break the netherblock below");
+				player.sendMessage(ChatColor.RED + "[PMF] Fire above netherrack is protected, you need to break the netherblock below");
 				event.setCancelled(true);
+				block.setType(Material.FIRE);
 				return;
 			}
 		}
