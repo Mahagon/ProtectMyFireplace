@@ -3,4 +3,14 @@ main: net.mahagon.ProtectMyFireplace.ProtectMyFireplacePlugin
 author: Mahagon
 prefix: ProtectMyFireplace
 desciption: Prevent destroying fireplaces with netherblocks below.
-version: 1.0.1
+version: 1.0.2
+
+permissions:
+   pmf.*:
+      description: Gives you all pmf permissions
+      default: op
+      children:
+         pmf.createfireplace: true
+   pmf.createfireplace:
+      description: With this permission you are able to create fireplaces.
+      default: op

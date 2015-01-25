@@ -14,6 +14,8 @@ public class ProtectMyFireplacePlugin extends JavaPlugin
 	public void onEnable() {
 		PlayerListener playerListener = new PlayerListener();
 		Bukkit.getServer().getPluginManager().registerEvents(playerListener, this);
+		BlockListener blockListener = new BlockListener();
+		Bukkit.getServer().getPluginManager().registerEvents(blockListener, this);
 	}
     /**
      * Called on plugin disable.
