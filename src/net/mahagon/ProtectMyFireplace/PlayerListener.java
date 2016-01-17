@@ -24,7 +24,7 @@ public class PlayerListener implements Listener {
 					}
 					block.setType(Material.FIRE);	
 				} else {
-					block.setTypeId(Material.FIRE.getId(),false);
+					block.setType(Material.FIRE, false);
 				}
 				player.sendMessage(ChatColor.RED + "[PMF] Fire above netherrack is protected, you need to break the netherblock below");
 				event.setCancelled(true);
