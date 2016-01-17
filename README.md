@@ -4,4 +4,4 @@ Create beatiful small fireplaces with trapdors (optional) and protect them from 
 # Bukkit Plugin Download and Description
 
 * http://dev.bukkit.org/bukkit-plugins/protectmyfireplace/
-* https://www.spigotmc.org/threads/protectmyfireplace.68917/
+* https://www.spigotmc.org/resources/protectmyfireplace.7625/
