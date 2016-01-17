@@ -3,15 +3,16 @@ version '1.0.5'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
     maven {
-        url 'https://hub.spigotmc.org/nexus/content/groups/public/'
+        name = 'sponge'
+        url = 'http://repo.spongepowered.org/maven'
     }
 }
 
 dependencies {
-    compile group: 'org.bukkit', name: 'bukkit', version: '1.8.8-R0.1-SNAPSHOT'
+    compile 'org.spongepowered:spongeapi:3.1.0-SNAPSHOT'
 }
