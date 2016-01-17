@@ -1,10 +1,5 @@
 # ProtectMyFireplace
-Create beatiful small fireplaces with trapdors (optional) and protect them from being put out.
-
-# Bukkit Plugin Download and Description
-
-http://dev.bukkit.org/bukkit-plugins/protectmyfireplace/
-https://www.spigotmc.org/threads/protectmyfireplace.68917/
+Create beautiful small fireplaces with trapdoors (optional) and protect them from being put out.
 
 # Sponge Plugin and Description
-coming soon :O
+https://forums.spongepowered.org/t/protectmyfireplace-v1-0-5-api-3-1-0/10858?u=mahagon
