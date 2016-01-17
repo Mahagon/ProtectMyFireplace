@@ -4,7 +4,7 @@ jdk:
 notifications:
   email: false
 deploy:
-  - provider: Mahagon
+  - provider: releases
     skip_cleanup: true
     on:
       repo: Mahagon/ProtectMyFireplace
