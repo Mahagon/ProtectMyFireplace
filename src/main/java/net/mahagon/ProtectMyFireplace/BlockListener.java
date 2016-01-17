@@ -1,30 +1,68 @@
 package net.mahagon.ProtectMyFireplace;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockIgniteEvent;
+import java.util.Optional;
 
-public class BlockListener implements Listener {
-	@EventHandler
-	public void onBlockIgnite(BlockIgniteEvent event) {
-		Player player = event.getPlayer();
-		if(player != null){
-			Block block = event.getBlock();
-			if(block != null && block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) && block.getRelative(BlockFace.DOWN, 2).getType().equals(Material.NETHERRACK)){
-				if(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST).getType().equals(Material.TRAP_DOOR) || block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST).getType().equals(Material.TRAP_DOOR) || block.getRelative(BlockFace.DOWN).getRelative(BlockFace.SOUTH).getType().equals(Material.TRAP_DOOR) || block.getRelative(BlockFace.DOWN).getRelative(BlockFace.NORTH).getType().equals(Material.TRAP_DOOR)){
-					if(player.hasPermission("pmf.createfireplace")){
-						block.getRelative(BlockFace.DOWN).setType(Material.FIRE, false);
-						player.sendMessage(ChatColor.GREEN + "[PMF] Fireplace has been created!");
-					} else {
-						player.sendMessage(ChatColor.RED + "[PMF] You need the permission pmf.createfireplace to create a fireplace!");
-					}
-				}
-			}
-		}
-	}
+import org.spongepowered.api.block.BlockSnapshot;
+import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.EventListener;
+import org.spongepowered.api.event.block.ChangeBlockEvent;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.util.Direction;
+import org.spongepowered.api.world.DimensionTypes;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
+
+public class BlockListener implements EventListener<ChangeBlockEvent> {
+  @Override
+  public void handle(ChangeBlockEvent event) throws Exception {
+    if (event.getCause().root() instanceof Player && event.getTransactions().size() > 0) {
+      Player player = (Player) event.getCause().root();
+      if (event instanceof ChangeBlockEvent.Place) {
+        BlockSnapshot block = event.getTransactions().get(0).getDefault();
+        if (block.getExtendedState().getType().equals(BlockTypes.FIRE)) {
+          Optional<Location<World>> location = block.getLocation();
+          if (location.isPresent()
+              && location.get().add(Direction.DOWN.toVector3d()).getBlockType()
+                  .equals(BlockTypes.NETHERRACK)
+              && location.get().add(Direction.DOWN.toVector3d()).add(Direction.DOWN.toVector3d())
+                  .getBlockType().equals(BlockTypes.NETHERRACK)
+              && (location.get().add(Direction.DOWN.toVector3d()).add(Direction.EAST.toVector3d())
+                  .getBlockType().equals(BlockTypes.TRAPDOOR)
+                  || location.get().add(Direction.DOWN.toVector3d())
+                      .add(Direction.WEST.toVector3d()).getBlockType().equals(BlockTypes.TRAPDOOR)
+                  || location.get().add(Direction.DOWN.toVector3d())
+                      .add(Direction.SOUTH.toVector3d()).getBlockType().equals(BlockTypes.TRAPDOOR)
+                  || location.get().add(Direction.DOWN.toVector3d())
+                      .add(Direction.NORTH.toVector3d()).getBlockType()
+                      .equals(BlockTypes.TRAPDOOR))) {
+            if (player.hasPermission("pmf.createfireplace")) {
+              location.get().add(Direction.DOWN.toVector3d()).setBlockType(BlockTypes.FIRE, false);
+              player.sendMessage(Text.builder("[PMF] Fireplace has been created!")
+                  .color(TextColors.GREEN).build());
+            } else {
+              player.sendMessage(Text
+                  .builder(
+                      "[PMF] You need the permission pmf.createfireplace to create a fireplace!")
+                  .color(TextColors.RED).build());
+            }
+          }
+        }
+      } else if (event instanceof ChangeBlockEvent.Break) {
+        BlockSnapshot block = event.getTransactions().get(0).getOriginal();
+        Optional<Location<World>> location = block.getLocation();
+        if (location.isPresent() && block.getExtendedState().getType().equals(BlockTypes.FIRE)
+            && location.get().add(Direction.DOWN.toVector3d()).getBlockType()
+                .equals(BlockTypes.NETHERRACK)
+            && !player.getWorld().getDimension().getType().equals(DimensionTypes.NETHER)) {
+          player.sendMessage(Text
+              .builder(
+                  "[PMF] Fire above netherrack is protected, you need to break the netherblock below")
+              .color(TextColors.RED).build());
+          event.setCancelled(true);
+        }
+      }
+    }
+  }
 }

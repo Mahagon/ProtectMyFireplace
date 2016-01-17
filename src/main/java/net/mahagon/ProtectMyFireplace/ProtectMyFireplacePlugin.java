@@ -1,33 +1,46 @@
 package net.mahagon.ProtectMyFireplace;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.slf4j.Logger;
+import org.spongepowered.api.Game;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.block.ChangeBlockEvent;
+import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
+import org.spongepowered.api.plugin.Plugin;
 
-public class ProtectMyFireplacePlugin extends JavaPlugin
-{
-	private static Plugin plugin;
-    /**
-     * Called on plugin enable.
-     */
-	@Override
-	public void onEnable() {
-		PlayerListener playerListener = new PlayerListener();
-		Bukkit.getServer().getPluginManager().registerEvents(playerListener, this);
-		BlockListener blockListener = new BlockListener();
-		Bukkit.getServer().getPluginManager().registerEvents(blockListener, this);
-	}
-    /**
-     * Called on plugin disable.
-     */
-    @Override
-	public void onDisable(){
-    	plugin = null;
-	}
-	/**
-     * Called on Command.
-     */
-    public static Plugin getPlugin() {
-    	return plugin;
-    }
+import com.google.inject.Inject;
+
+@Plugin(id = "pmf", name = "ProtectMyFireplace", version = "1.0.5")
+public class ProtectMyFireplacePlugin {
+  private static Logger logger;
+  private static Game game;
+
+  @Inject
+  private void setLogger(Logger logger) {
+    ProtectMyFireplacePlugin.logger = logger;
+  }
+
+  public static Logger getLogger() {
+    return logger;
+  }
+
+  @Inject
+  private void setGame(Game game) {
+    ProtectMyFireplacePlugin.game = game;
+  }
+
+  public static Game getGame() {
+    return game;
+  }
+
+  @Listener
+  public void onServerStarted(GameStartedServerEvent event) {
+    getGame().getEventManager().registerListener(this, ChangeBlockEvent.class, new BlockListener());
+  }
+
+  @Listener
+  public void disable(GameStoppingServerEvent event) {
+    getGame().getEventManager().unregisterPluginListeners(this);
+  }
+
 }
