@@ -3,9 +3,12 @@ jdk:
   - oraclejdk8
 notifications:
   email: false
+
 deploy:
-  - provider: releases
-    skip_cleanup: true
-    on:
-      repo: Mahagon/ProtectMyFireplace
-      branch: sponge
+  file_glob: true
+  provider: releases
+  api-key: ${GITHUB_API}
+  file: ProtectMyFireplace.jar
+  skip_cleanup: true
+  on:
+    tags: true
