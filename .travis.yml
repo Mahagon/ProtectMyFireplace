@@ -13,3 +13,4 @@ deploy:
   on:
     repo: Mahagon/ProtectMyFireplace
     branch: sponge
+    tags: true
