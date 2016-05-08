@@ -10,7 +10,9 @@ import org.spongepowered.api.plugin.Plugin;
 
 import com.google.inject.Inject;
 
-@Plugin(id = "pmf", name = "ProtectMyFireplace", version = "1.0.6")
+@Plugin(id = "pmf", name = "ProtectMyFireplace", version = "1.0.6",
+    description = "Create fireplaces and protect them", authors = {"Mahagon"},
+    url = "https://mahagon.net")
 public class ProtectMyFireplacePlugin {
   private static Logger logger;
   private static Game game;

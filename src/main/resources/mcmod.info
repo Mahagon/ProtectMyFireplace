@@ -1,0 +1,9 @@
+[{
+    "modid": "pmf",
+    "name": "ProtectMyFireplace",
+    "version": "1.0.6",
+    "description": "Create fireplaces and protect them",
+    "authorList": [
+        "Mahagon"
+    ]
+}]
