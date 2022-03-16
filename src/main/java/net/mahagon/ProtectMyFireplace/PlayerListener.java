@@ -22,7 +22,7 @@ public class PlayerListener implements Listener {
 					if(player.getWorld().getEnvironment().equals(World.Environment.NETHER)){
 						return;
 					}
-					block.setType(Material.FIRE);	
+					block.setType(Material.FIRE);
 				} else {
 					block.setType(Material.FIRE, false);
 				}
