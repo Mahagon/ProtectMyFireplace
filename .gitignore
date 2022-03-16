@@ -20,3 +20,6 @@
 /agitar
 /dist
 /manifest.mf
+
+# other
+.gradle/
