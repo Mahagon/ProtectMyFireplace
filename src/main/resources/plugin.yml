@@ -1,3 +1,6 @@
+---
+load: POSTWORLD
+website: https://www.spigotmc.org/resources/protectmyfireplace.7625/
 name: ProtectMyFireplace
 main: net.mahagon.ProtectMyFireplace.ProtectMyFireplacePlugin
 author: Mahagon
@@ -6,11 +9,11 @@ desciption: Prevent destroying fireplaces with netherblocks below.
 version: 1.0.5
 
 permissions:
-   pmf.*:
-      description: Gives you all pmf permissions
-      default: op
-      children:
-         pmf.createfireplace: true
-   pmf.createfireplace:
-      description: With this permission you are able to create fireplaces.
-      default: op
+  pmf.*:
+    description: Gives you all pmf permissions
+    default: op
+    children:
+      pmf.createfireplace: true
+  pmf.createfireplace:
+    description: With this permission you are able to create fireplaces.
+    default: op
