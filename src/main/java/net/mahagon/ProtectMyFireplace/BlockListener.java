@@ -13,18 +13,34 @@ public class BlockListener implements Listener {
 	@EventHandler
 	public void onBlockIgnite(BlockIgniteEvent event) {
 		Player player = event.getPlayer();
-		if(player != null){
-			Block block = event.getBlock();
-			if(block != null && block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) && block.getRelative(BlockFace.DOWN, 2).getType().equals(Material.NETHERRACK)){
-				if(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST).getType().equals(Material.TRAP_DOOR) || block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST).getType().equals(Material.TRAP_DOOR) || block.getRelative(BlockFace.DOWN).getRelative(BlockFace.SOUTH).getType().equals(Material.TRAP_DOOR) || block.getRelative(BlockFace.DOWN).getRelative(BlockFace.NORTH).getType().equals(Material.TRAP_DOOR)){
-					if(player.hasPermission("pmf.createfireplace")){
-						block.getRelative(BlockFace.DOWN).setType(Material.FIRE, false);
-						player.sendMessage(ChatColor.GREEN + "[PMF] Fireplace has been created!");
-					} else {
-						player.sendMessage(ChatColor.RED + "[PMF] You need the permission pmf.createfireplace to create a fireplace!");
-					}
-				}
-			}
+		if (null == player) {
+			return;
+		}
+		Block block = event.getBlock();
+		if (
+			!(
+				null != block &&
+				block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) &
+				block.getRelative(BlockFace.DOWN, 2).getType().equals(Material.NETHERRACK)
+			)
+		) {
+			return;
+		}
+		if (
+			!(
+				block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST).getType().name().endsWith("TRAPDOOR") ||
+				block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST).getType().name().endsWith("TRAPDOOR") ||
+				block.getRelative(BlockFace.DOWN).getRelative(BlockFace.NORTH).getType().name().endsWith("TRAPDOOR") ||
+				block.getRelative(BlockFace.DOWN).getRelative(BlockFace.SOUTH).getType().name().endsWith("TRAPDOOR")
+			)
+		) {
+			return;
+		}
+		if(player.hasPermission("pmf.createfireplace")) {
+			block.getRelative(BlockFace.DOWN).setType(Material.FIRE, false);
+			player.sendMessage(ChatColor.GREEN + "[PMF] Fireplace has been created!");
+		} else {
+			player.sendMessage(ChatColor.RED + "[PMF] You need the permission pmf.createfireplace to create a fireplace!");
 		}
 	}
 }

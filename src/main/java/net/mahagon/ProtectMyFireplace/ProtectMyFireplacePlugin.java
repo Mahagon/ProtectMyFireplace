@@ -24,7 +24,7 @@ public class ProtectMyFireplacePlugin extends JavaPlugin
 	public void onDisable(){
     	plugin = null;
 	}
-	/**
+		/**
      * Called on Command.
      */
     public static Plugin getPlugin() {
