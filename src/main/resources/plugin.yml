@@ -1,4 +1,5 @@
 ---
+api-version: 1.18
 load: POSTWORLD
 website: https://www.spigotmc.org/resources/protectmyfireplace.7625/
 name: ProtectMyFireplace
@@ -6,7 +7,7 @@ main: net.mahagon.ProtectMyFireplace.ProtectMyFireplacePlugin
 author: Mahagon
 prefix: ProtectMyFireplace
 desciption: Prevent destroying fireplaces with netherblocks below.
-version: 1.0.5
+version: 1.0.7
 
 permissions:
   pmf.*:
