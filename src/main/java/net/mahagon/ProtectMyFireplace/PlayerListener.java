@@ -17,10 +17,6 @@ public class PlayerListener implements Listener {
 		if (!event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			return;
 		}
-		Player player = event.getPlayer();
-		if(player.getWorld().getEnvironment().equals(World.Environment.NETHER)){
-			return;
-		}
 		Block block = event.getClickedBlock();
 		if (!block.getType().equals(Material.FIRE)) {
 			return;
@@ -36,6 +32,7 @@ public class PlayerListener implements Listener {
 			return;
 		}
 		if (block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK)) {
+			Player player = event.getPlayer();
 			player.sendMessage(ChatColor.RED + "[PMF] Fire above netherrack is protected, you need to break the netherblock below");
 			event.setCancelled(true);
 			return;
