@@ -1,4 +1,4 @@
-package net.mahagon.ProtectMyFireplace;
+package net.mahagon.ProtectMyFireplace.application;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
