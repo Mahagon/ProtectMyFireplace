@@ -8,15 +8,15 @@ sourceCompatibility = 1.17
 repositories {
   maven {
     url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-
     content {
       includeGroup 'org.bukkit'
       includeGroup 'org.spigotmc'
     }
   }
-
   mavenCentral()
-  maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+  maven {
+    url = 'https://oss.sonatype.org/content/repositories/snapshots'
+  }
 }
 
 dependencies {
