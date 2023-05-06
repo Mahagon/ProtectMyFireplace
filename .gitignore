@@ -15,6 +15,7 @@
 
 # various other potential build files
 /build
+/target
 /bin
 /release
 /agitar

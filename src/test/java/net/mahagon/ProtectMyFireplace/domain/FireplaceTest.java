@@ -2,7 +2,6 @@ package net.mahagon.ProtectMyFireplace.domain;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
