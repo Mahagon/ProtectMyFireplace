@@ -1,6 +1,6 @@
-package net.mahagon.ProtectMyFireplace.application;
+package net.mahagon.protectmyfireplace.application;
 
-import net.mahagon.ProtectMyFireplace.domain.Fireplace;
+import net.mahagon.protectmyfireplace.domain.Fireplace;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -10,17 +10,19 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 /**
- * PlayerListener listens for player interaction events and handles fireplace protection.
+ * PlayerListener listens for player interaction events and handles fireplace
+ * protection.
  */
 public class PlayerListener implements Listener {
 
   /**
-   * Handles the PlayerInteractEvent to check if the fireplace is protected and react accordingly.
+   * Handles the PlayerInteractEvent to check if the fireplace is protected and
+   * react accordingly.
    *
    * @param event the PlayerInteractEvent
    */
   @EventHandler
-  public void onPlayerInteract(PlayerInteractEvent event) {
+  public void onPlayerInteract(final PlayerInteractEvent event) {
     if (!event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
       return;
     }
@@ -40,13 +42,15 @@ public class PlayerListener implements Listener {
   }
 
   /**
-   * Handles the protected fire, sends a message to the player, and cancels the event.
+   * Handles the protected fire, sends a message to the player, and cancels the
+   * event.
    *
    * @param event the PlayerInteractEvent
    */
-  private void handleProtectedFire(PlayerInteractEvent event) {
+  private void handleProtectedFire(final PlayerInteractEvent event) {
     Player player = event.getPlayer();
-    player.sendMessage(ChatColor.RED + "[PMF] Fire above netherrack is protected, you need to break the netherblock below");
+    player.sendMessage(ChatColor.RED
+        + "[PMF] Fire above netherrack is protected, you need to break the netherblock below");
     event.setCancelled(true);
   }
 }

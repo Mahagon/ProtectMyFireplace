@@ -1,4 +1,4 @@
-package net.mahagon.ProtectMyFireplace.application;
+package net.mahagon.protectmyfireplace.application;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -8,25 +8,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  * It handles enabling and disabling the plugin and registering event listeners.
  */
 public class ProtectMyFireplacePlugin extends JavaPlugin {
-  private static ProtectMyFireplacePlugin instance;
 
   /**
    * Called when the plugin is enabled.
-   * Initializes the instance and registers event listeners.
+   * Registers event listeners.
    */
   @Override
   public void onEnable() {
-    instance = this;
     registerListeners();
   }
 
   /**
    * Called when the plugin is disabled.
-   * Sets the instance to null.
    */
   @Override
   public void onDisable() {
-    instance = null;
   }
 
   /**
@@ -35,7 +31,7 @@ public class ProtectMyFireplacePlugin extends JavaPlugin {
    * @return the instance of ProtectMyFireplacePlugin
    */
   public static ProtectMyFireplacePlugin getInstance() {
-    return instance;
+    return JavaPlugin.getPlugin(ProtectMyFireplacePlugin.class);
   }
 
   /**

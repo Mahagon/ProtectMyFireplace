@@ -1,6 +1,9 @@
-package net.mahagon.ProtectMyFireplace.application;
+package net.mahagon.protectmyfireplace.application;
 
-import net.mahagon.ProtectMyFireplace.domain.Fireplace;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import net.mahagon.protectmyfireplace.domain.Fireplace;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -9,8 +12,6 @@ import org.bukkit.event.block.BlockIgniteEvent;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-
-import static org.mockito.Mockito.*;
 
 class BlockListenerTest {
 
