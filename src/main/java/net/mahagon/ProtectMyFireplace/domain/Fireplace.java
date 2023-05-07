@@ -1,36 +1,38 @@
-package net.mahagon.ProtectMyFireplace.domain;
+package net.mahagon.protectmyfireplace.domain;
 
+import net.mahagon.protectmyfireplace.application.ProtectMyFireplacePlugin;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
-import net.mahagon.ProtectMyFireplace.application.ProtectMyFireplacePlugin;
-
 /**
  * Fireplace represents a fireplace in the ProtectMyFireplace plugin.
  * It contains methods to check if a fireplace is protected, can be created,
  * create a fireplace, and extinguish a fireplace.
  */
-public class Fireplace {
+public final class Fireplace {
+  /**
+   * The block representing the fireplace.
+   */
   private final Block block;
 
-  private Fireplace(Block block) {
-    this.block = block;
+  private Fireplace(final Block fireplaceBlock) {
+    this.block = fireplaceBlock;
   }
 
   /**
    * Creates a Fireplace object from a given Block.
    *
-   * @param block the Block to create a Fireplace from
+   * @param fireplaceBlock the Block to create a Fireplace from
    * @return a Fireplace object, or null if the block is null
    */
-  public static Fireplace fromBlock(Block block) {
-    if (block == null) {
+  public static Fireplace fromBlock(final Block fireplaceBlock) {
+    if (fireplaceBlock == null) {
       return null;
     }
-    return new Fireplace(block);
+    return new Fireplace(fireplaceBlock);
   }
 
   /**
@@ -39,9 +41,10 @@ public class Fireplace {
    * @return true if the fireplace is protected, false otherwise
    */
   public boolean isProtected() {
-    return block.getType().equals(Material.FIRE) &&
-           block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) &&
-           block.getRelative(BlockFace.DOWN).hasMetadata("pmf");
+    Block lowerBlock = block.getRelative(BlockFace.DOWN);
+    return block.getType().equals(Material.FIRE)
+        && lowerBlock.getType().equals(Material.NETHERRACK)
+        && lowerBlock.hasMetadata("pmf");
   }
 
   /**
@@ -51,9 +54,9 @@ public class Fireplace {
    */
   public boolean canBeCreated() {
     Block lowerBlock = block.getRelative(BlockFace.DOWN);
-    return lowerBlock.getType().equals(Material.NETHERRACK) &&
-           lowerBlock.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) &&
-           hasTrapDoorAround(lowerBlock);
+    return lowerBlock.getType().equals(Material.NETHERRACK)
+        && lowerBlock.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK)
+        && hasTrapDoorAround(lowerBlock);
   }
 
   /**
@@ -80,11 +83,11 @@ public class Fireplace {
    * @param center the center Block to check around
    * @return true if there is a trapdoor around the center block, false otherwise
    */
-  private boolean hasTrapDoorAround(Block center) {
-    return isTrapDoor(center.getRelative(BlockFace.EAST).getType()) ||
-           isTrapDoor(center.getRelative(BlockFace.WEST).getType()) ||
-           isTrapDoor(center.getRelative(BlockFace.NORTH).getType()) ||
-           isTrapDoor(center.getRelative(BlockFace.SOUTH).getType());
+  private boolean hasTrapDoorAround(final Block center) {
+    return isTrapDoor(center.getRelative(BlockFace.EAST).getType())
+        || isTrapDoor(center.getRelative(BlockFace.WEST).getType())
+        || isTrapDoor(center.getRelative(BlockFace.NORTH).getType())
+        || isTrapDoor(center.getRelative(BlockFace.SOUTH).getType());
   }
 
   /**
@@ -93,7 +96,7 @@ public class Fireplace {
    * @param material the Material to check
    * @return true if the material is a trapdoor, false otherwise
    */
-  private boolean isTrapDoor(Material material) {
+  private boolean isTrapDoor(final Material material) {
     return material.name().toLowerCase().endsWith("trapdoor");
   }
 }
