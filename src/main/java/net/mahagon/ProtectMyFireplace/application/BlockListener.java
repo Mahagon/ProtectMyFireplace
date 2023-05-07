@@ -27,7 +27,6 @@ public class BlockListener implements Listener {
 
     Block block = event.getBlock();
     Fireplace fireplace = Fireplace.fromBlock(block);
-
     if (fireplace == null || !fireplace.canBeCreated()) {
       return;
     }
