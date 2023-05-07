@@ -1,6 +1,6 @@
 # ProtectMyFireplace
 
-Create beautiful small fireplaces with optional trapdoors and protect them from being put out.
+Create cozy small fireplaces with optional trapdoors and protect them from being put out.
 
 ## Download and Description
 
@@ -22,10 +22,10 @@ Create beautiful small fireplaces with optional trapdoors and protect them from 
 ## Usage
 
 1. Place two netherrack blocks on top of each other.
-2. Surround the lower netherrack block with trapdoors (optional).
+2. Surround the lower netherrack block with trapdoors (at least one).
 3. Ignite the top netherrack block to create a protected fireplace.
 
-Users with the `pmf.createfireplace` permission can create fireplaces, and the fire above netherrack will be protected from being extinguished.
+Users with the `pmf.createfireplace` permission can create fireplaces, and the fire above netherrack will be protected from being extinguished by left clicking on it.
 
 ## Permissions
 
