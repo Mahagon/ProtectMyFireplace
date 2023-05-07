@@ -1,11 +1,8 @@
 package net.mahagon.protectmyfireplace.domain;
 
-import net.mahagon.protectmyfireplace.application.ProtectMyFireplacePlugin;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.plugin.Plugin;
 
 /**
  * Fireplace represents a fireplace in the ProtectMyFireplace plugin.
@@ -44,7 +41,7 @@ public final class Fireplace {
     Block lowerBlock = block.getRelative(BlockFace.DOWN);
     return block.getType().equals(Material.FIRE)
         && lowerBlock.getType().equals(Material.NETHERRACK)
-        && lowerBlock.hasMetadata("pmf");
+        && hasTrapDoorAround(block);
   }
 
   /**
@@ -65,9 +62,6 @@ public final class Fireplace {
   public void create() {
     Block lowerBlock = block.getRelative(BlockFace.DOWN);
     lowerBlock.setType(Material.FIRE, false);
-    Plugin plugin = ProtectMyFireplacePlugin.getInstance();
-    FixedMetadataValue metadata = new FixedMetadataValue(plugin, "protected");
-    lowerBlock.getRelative(BlockFace.DOWN).setMetadata("pmf", metadata);
   }
 
   /**
