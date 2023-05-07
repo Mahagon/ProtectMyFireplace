@@ -3,6 +3,10 @@ package net.mahagon.ProtectMyFireplace.domain;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.plugin.Plugin;
+
+import net.mahagon.ProtectMyFireplace.application.ProtectMyFireplacePlugin;
 
 /**
  * Fireplace represents a fireplace in the ProtectMyFireplace plugin.
@@ -20,10 +24,10 @@ public class Fireplace {
    * Creates a Fireplace object from a given Block.
    *
    * @param block the Block to create a Fireplace from
-   * @return a Fireplace object, or null if the block is not a fire block
+   * @return a Fireplace object, or null if the block is null
    */
   public static Fireplace fromBlock(Block block) {
-    if (block == null || !block.getType().equals(Material.FIRE)) {
+    if (block == null) {
       return null;
     }
     return new Fireplace(block);
@@ -35,8 +39,9 @@ public class Fireplace {
    * @return true if the fireplace is protected, false otherwise
    */
   public boolean isProtected() {
-    return block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) &&
-           hasTrapDoorAround(block.getRelative(BlockFace.DOWN));
+    return block.getType().equals(Material.FIRE) &&
+           block.getRelative(BlockFace.DOWN).getType().equals(Material.NETHERRACK) &&
+           block.getRelative(BlockFace.DOWN).hasMetadata("pmf");
   }
 
   /**
@@ -55,7 +60,11 @@ public class Fireplace {
    * Creates the fireplace by setting the block below the fire to be a fire block.
    */
   public void create() {
-    block.getRelative(BlockFace.DOWN).setType(Material.FIRE, false);
+    Block lowerBlock = block.getRelative(BlockFace.DOWN);
+    lowerBlock.setType(Material.FIRE, false);
+    Plugin plugin = ProtectMyFireplacePlugin.getInstance();
+    FixedMetadataValue metadata = new FixedMetadataValue(plugin, "protected");
+    lowerBlock.getRelative(BlockFace.DOWN).setMetadata("pmf", metadata);
   }
 
   /**
@@ -85,6 +94,6 @@ public class Fireplace {
    * @return true if the material is a trapdoor, false otherwise
    */
   private boolean isTrapDoor(Material material) {
-    return material.name().endsWith("TRAPDOOR");
+    return material.name().toLowerCase().endsWith("trapdoor");
   }
 }

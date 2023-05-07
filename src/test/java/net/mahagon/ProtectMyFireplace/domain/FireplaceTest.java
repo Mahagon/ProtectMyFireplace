@@ -26,14 +26,4 @@ class FireplaceTest {
 
     assertNull(fireplace);
   }
-
-  @Test
-  void fromBlockWithNonFireBlock() {
-    Block nonFireBlock = Mockito.mock(Block.class);
-    when(nonFireBlock.getType()).thenReturn(Material.STONE);
-
-    Fireplace fireplace = Fireplace.fromBlock(nonFireBlock);
-
-    assertNull(fireplace);
-  }
 }
